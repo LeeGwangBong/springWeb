@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper">
+    <select id="selectUser" resultType="com.signin.data.UserData">
+        SELECT userId, userPwd
+        FROM userdata
+        WHERE userId = #{userId};
+    </select>
+    <select id="selectUserData" resultType="com.signin.data.UserData">
+        SELECT userId, userPwd, userName, nickName, userPhone
+        FROM userdata;
+        WHERE userId = #{userId};
+    </select>
+    <insert id="insertUser">
+        INSERT INTO userdata(userId, userPwd)
+        VALUES(#{userId}, #{UserPwd});
+    </insert>
+    <insert id="insertUserData">
+        INSERT INTO userdata(userNum,userId, userName, nickName, userPwd, userPhone)
+        VALUES(#{userNum},#{userId}, #{userName}, #{nickName}, #{userPwd}, #{userPhone});
+    </insert>
+
+    <select id="countUserData" resultType="Integer">
+      SELECT IFNULL(COUNT(*),0) FROM userdata;
+    </select>
+
+    <insert id="insertBookData">
+        INSERT INTO book(bookNum, bookId, bookName, bookAuthor, price, company, created, category)
+        VALUES(#{bookNum},#{bookId}, #{bookName}, #{bookAuthor}, #{price}, #{company}, sysdate(), #{category});
+    </insert>
+
+    <select id="countBookData" resultType="Integer">
+        SELECT IFNULL(COUNT(*),0) FROM book;
+    </select>
+
+    <select id="selectBookDataList" resultType="com.signin.data.BookData">
+        SELECT bookNum,bookId, bookName, bookAuthor, price, company, created, category FROM book;
+    </select>
+</mapper>
